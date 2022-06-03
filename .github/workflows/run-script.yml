@@ -3,7 +3,7 @@ name: Dublin Airport Queues in June
 
 on:
   schedule:
-    - cron: '10 * 6 *'  # Every 15 mins in June
+    - cron: '15 * 6 *'  # Every 15 mins in June
   
   workflow_dispatch:
   
@@ -17,12 +17,6 @@ jobs:
       - name: Github Checkout
         uses: actions/checkout@v3
 
-      - name: Downloading previous data to append to files
-        uses: actions/download-artifacts@v3
-        with:
-          name: The queue times
-          path: data/*.csv
-
       - name: Setup python enviroment and run the script
         uses: actions/setup-python@v3
         with:
@@ -31,8 +25,15 @@ jobs:
       - run: |
           pip install -r requirements.txt
           python main.py
-          
+
+      - name: Downloading previous data to append to files
+        uses: actions/download-artifacts@v3
+        with:
+          name: The queue times
+          path: data/*.csv
+
       - name: Save the data
+        if: always()
         uses: actions/upload-artifact@v3
         with:
           name: The queue times
