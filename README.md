@@ -22,3 +22,8 @@ conda activate tqueues
 ```
 python main.py
 ```
+
+# Plot the data
+```
+python plot.py
+```
