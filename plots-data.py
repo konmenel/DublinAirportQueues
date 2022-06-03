@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 
 def main() -> int:
-    """Main function."""
+    """Main function. Load the csv and plot the data of the two terminals in one figure."""
     fig, axes = plt.subplots(1, 2, figsize=(10, 5))
     for terminal, ax in enumerate(axes, 1):
         data = pd.read_csv(
@@ -14,6 +14,8 @@ def main() -> int:
         )
 
         ax.plot(data['Timestamp[%Y-%m-%d %H:%M]'], data['Queue[mins]'])
+        ax.set_title(f'Terminal {terminal}')
+        ax.set_ylabel('Queue time [mins]')
 
     fig.autofmt_xdate()
     plt.show()
