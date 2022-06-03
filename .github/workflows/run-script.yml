@@ -30,7 +30,6 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: The queue times
-          path: data/*.csv
 
       - name: Save the data
         if: always()
