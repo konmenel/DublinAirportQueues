@@ -33,6 +33,7 @@ jobs:
           path: data/*.csv
 
       - name: Save the data
+        if: always()
         uses: actions/upload-artifact@v3
         with:
           name: The queue times
