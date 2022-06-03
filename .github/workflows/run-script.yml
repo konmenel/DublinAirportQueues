@@ -17,26 +17,24 @@ jobs:
       - name: Github Checkout
         uses: actions/checkout@v3
 
-      - name: Downloading previous data
-        uses: actions/download-artifact@v3
+      - name: Uncaching previous data
+        uses: actions/cache@v3
         with:
-          name: The queue times
+          path: data
+          key: previous-times
 
       - name: Setup python enviroment
-        if: always()
         uses: actions/setup-python@v3
         with:
           python-version: '3.9'
           cache: 'pip'
       
       - name: Download dependencies and run the script 
-        if: always() 
         run: |
           pip install -r requirements.txt
           python main.py
           
       - name: Save the data
-        if: always()
         uses: actions/upload-artifact@v3
         with:
           name: The queue times
