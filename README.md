@@ -5,6 +5,8 @@ A simple python to get the queue times of the 2 terminals of Dublin Airport. It 
 # Dependencies
 1. bs4
 1. requests
+1. pandas
+1. matplotlib
 
 # Create the environment
 ```
