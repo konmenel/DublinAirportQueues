@@ -3,7 +3,7 @@ name: Dublin Airport Queues in June
 
 on:
   schedule:
-    - cron: '15 * 6 * *'  # Every 15 mins in June
+    - cron: '10 * 6 * *'  # Every 15 mins in June
   
   workflow_dispatch:
   
@@ -21,7 +21,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: data
-          key: previous-times
+          key: previous-data
 
       - name: Setup python enviroment
         uses: actions/setup-python@v3
