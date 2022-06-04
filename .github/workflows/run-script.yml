@@ -24,10 +24,8 @@ jobs:
           key: previous-data
 
       - run: "pwd"
-      - run: "ls -a .."
       - run: "ls -a ../.."
-      - run: "ls -a ../../.."
-      - run: "ls -a ../../../.."
+      - run: "ls -a ../../_actions"
 
       - name: Setup python enviroment
         uses: actions/setup-python@v3
