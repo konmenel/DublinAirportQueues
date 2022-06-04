@@ -8,26 +8,12 @@ on:
   workflow_dispatch:
   
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
     steps:
       - name: Github Checkout
         uses: actions/checkout@v3
-
-      - run: "ls -a"
-
-      - name: Uncaching previous data
-        uses: actions/cache@v3
-        with:
-          path: data
-          key: previous-data
-
-      - run: "pwd"
-      - run: "ls -a"
-      - run: "ls -a ../../_actions/actions"
 
       - name: Setup python enviroment
         uses: actions/setup-python@v3
