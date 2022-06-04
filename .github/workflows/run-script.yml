@@ -17,15 +17,17 @@ jobs:
       - name: Github Checkout
         uses: actions/checkout@v3
 
-      - run: ls -a >> data/output.csv
-
       - name: Uncaching previous data
         uses: actions/cache@v3
         with:
           path: data
           key: previous-data
 
-    - run: ls -a >> data/output.csv
+      - name : machine echo env
+        env: { CONTENT : "${{ toJson(env) }}" }
+        run: "echo $CONTENT"
+
+      - run: "ls -a"
 
       - name: Setup python enviroment
         uses: actions/setup-python@v3
