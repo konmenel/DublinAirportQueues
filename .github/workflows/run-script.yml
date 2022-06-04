@@ -17,6 +17,8 @@ jobs:
       - name: Github Checkout
         uses: actions/checkout@v3
 
+      - run: "ls -a"
+
       - name: Uncaching previous data
         uses: actions/cache@v3
         with:
@@ -24,8 +26,8 @@ jobs:
           key: previous-data
 
       - run: "pwd"
-      - run: "ls -a ../.."
-      - run: "ls -a ../../_actions"
+      - run: "ls -a"
+      - run: "ls -a ../../_actions/actions"
 
       - name: Setup python enviroment
         uses: actions/setup-python@v3
