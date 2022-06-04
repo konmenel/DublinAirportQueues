@@ -23,11 +23,8 @@ jobs:
           path: data
           key: previous-data
 
-      - name : machine echo env
-        env: { CONTENT : "${{ toJson(env) }}" }
-        run: "echo $CONTENT"
-
-      - run: "ls -a"
+      - run: "pwd"
+      - run: "ls -a .."
 
       - name: Setup python enviroment
         uses: actions/setup-python@v3
