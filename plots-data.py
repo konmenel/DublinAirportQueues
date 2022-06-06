@@ -1,10 +1,11 @@
-import sys
+#!/usr/bin/env python3
 import pandas as pd
 import matplotlib.pyplot as plt
 
 
 def main() -> int:
     """Main function. Load the csv and plot the data of the two terminals in one figure."""
+
     fig, axes = plt.subplots(1, 2, figsize=(10, 5))
     for terminal, ax in enumerate(axes, 1):
         data = pd.read_csv(
@@ -23,4 +24,4 @@ def main() -> int:
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    raise SystemExit(main())

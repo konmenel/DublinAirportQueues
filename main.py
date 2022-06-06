@@ -1,6 +1,6 @@
+#!/usr/bin/env python3
 """Python script to scrape the terminal queues for dublin airport and save the data to a csv file."""
 import os
-import sys
 import re
 import datetime
 from typing import Dict
@@ -59,4 +59,4 @@ def main() -> int:
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    raise SystemExit(main())
