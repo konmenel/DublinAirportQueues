@@ -3,15 +3,14 @@
 import os
 import re
 import datetime
+import argparse
 from typing import Dict
 
 import requests
 from bs4 import BeautifulSoup
 
 
-
 URL = "https://www.dublinairport.com/flight-information/live-departures"
-
 
 def save_to_csv(data: Dict[str, int]) -> None:
     """Function to save the data to a csv file. If it exist it will append the data to the file.
@@ -37,23 +36,44 @@ def save_to_csv(data: Dict[str, int]) -> None:
 
 
 def main() -> int:
-    """Main function
+    """Scrape the data from the website and save it to a csv file.
 
     Returns
     -------
     int
         Exit status of the program. 0 for success, 1 for failure. 
     """
-    page = requests.get(URL)
-    soup = BeautifulSoup(page.text, "html.parser")
 
-    queues = soup.find("div", class_="sec-times")
+    # Parsing the command line arguments
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-p', '--plot', action='store_true', help='Plot the data')
+    parser.add_argument('-n', '--no-scrape', action='store_true', help='Do not scrape data')
 
-    queues_re = re.compile(r'<span><span>Terminal</span> (T[12]) <strong> = ([0-9]+) min</strong></span>')
+    args = parser.parse_args()
 
-    queues_times = {match[0]: int(match[1]) for match in queues_re.findall(str(queues))}
+    if args.no_scrape and not args.plot:
+        print('No actions specified.')
+        return 1
 
-    save_to_csv(queues_times)
+    if not args.no_scrape:
+        print('Scraping the data...', end='', flush=True)
+        page = requests.get(URL)
+        soup = BeautifulSoup(page.text, "html.parser")
+
+        queues = soup.find("div", class_="sec-times")
+
+        queues_re = re.compile(r'<span><span>Terminal</span> (T[12]) <strong> = ([0-9]+) min</strong></span>')
+
+        queues_times = {match[0]: int(match[1]) for match in queues_re.findall(str(queues))}
+
+        save_to_csv(queues_times)
+        print('Done')
+    
+    if args.plot:
+        # Importing plot only if needed (matplotlib is a heavy dependency)
+        import plot
+        plot.main()
+    
     return 0
 
 
