@@ -2,8 +2,8 @@
 name: Dublin Airport Queues in June
 
 on:
-#   schedule:
-#    - cron: '0/10 * * 6 *'  # Every 10 mins in June
+  schedule:
+   - cron: '0/15 * * 6 *'  # Every 15 mins in June
   
   workflow_dispatch:
   
@@ -21,14 +21,13 @@ jobs:
           python-version: '3.9'
           cache: 'pip'
       
-      - name: Download dependencies and run the script 
+      - name: Build dependencies and run the script 
         run: |
           pip install -r requirements.txt
           python main.py
           
       - name: Save the data
-        uses: actions/upload-artifact@v3
+        uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          name: The queue times
-          path: data/*.csv
-          
+          commit_message: Extended data [bot]
+          file_pattern: data/*.csv
