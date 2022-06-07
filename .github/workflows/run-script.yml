@@ -2,8 +2,8 @@
 name: Dublin Airport Queues in June
 
 on:
-  schedule:
-   - cron: '0/15 * * 6 *'  # Every 15 mins in June
+#   schedule:
+#    - cron: '0/15 * * 6 *'  # Every 15 mins in June
   
   workflow_dispatch:
   
